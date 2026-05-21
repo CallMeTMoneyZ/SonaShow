@@ -79,7 +79,7 @@ jobs:
       - name: Convert repository name to lowercase
         id: lowercase_repo
         run: |
-            REPO_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+            REPO_NAME=$(echo ${{ env.REPO_NAME }} | tr '[:upper:]' '[:lower:]')
             echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
 
       - name: Build and push
