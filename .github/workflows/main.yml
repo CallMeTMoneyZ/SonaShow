@@ -92,5 +92,5 @@ jobs:
           build-args: |
             RELEASE_VERSION=${{ needs.bump-version-and-create-release-tag.outputs.new_version }}
           tags: |
-            ${{ env.REPO_NAME }}:${{ needs.bump-version-and-create-release-tag.outputs.new_version }}
-            ${{ env.REPO_NAME }}:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/sonashow:${{ needs.bump-version-and-create-release-tag.outputs.new_version }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/sonashow:latest
