@@ -409,7 +409,9 @@ class DataHandler:
             if "data" in tvdb_data:
                 shows = tvdb_data["data"]
                 for show in shows:
-                    match_ratio = fuzz.ratio(f"{show_name.lower()} ({show_year})", show["name"].lower())
+                    match_ratio = max(
+                        fuzz.token_set_ratio(f"{show_name.lower()} ({show_year})", f"{title.lower()} ({show_year})") for
+                        title in [show["name"], *show.get("aliases", []), *show.get("translations", {}).values()])
                     decoded_match_ratio = fuzz.ratio(unidecode(show_name.lower()), unidecode(show["name"].lower()))
                     if match_ratio > 90 or decoded_match_ratio > 90 and show_year == show["year"]:
                         tvdb_id = show["tvdb_id"]
